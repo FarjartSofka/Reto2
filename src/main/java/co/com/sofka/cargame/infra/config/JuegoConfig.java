@@ -14,6 +14,9 @@ import co.com.sofka.cargame.usecase.listeners.*;
 import co.com.sofka.infraestructure.asyn.SubscriberEvent;
 import co.com.sofka.infraestructure.bus.EventBus;
 import co.com.sofka.infraestructure.repository.EventStoreRepository;
+import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,18 +27,11 @@ import java.util.Set;
 @Configuration
 public class JuegoConfig {
 
+    public static final String EXCHANGE = "cargame";
+
     @Bean
     public SubscriberEvent subscriberEvent(EventStoreRepository eventStoreRepository, EventBus eventBus) {
         return new SubscriberEvent(eventStoreRepository, eventBus);
-    }
-
-    @Bean
-    public EventSubscriber eventSubscriber(@Value("${spring.nats.uri}") String uri, EventListenerSubscriber eventListenerSubscriber, SocketController socketController) throws IOException, InterruptedException {
-        var eventSubs = new NATSEventSubscriber(uri, eventListenerSubscriber, socketController);
-        eventSubs.subscribe("juego.>", "handles.juego");
-        eventSubs.subscribe("carro.>", "handles.carro");
-        eventSubs.subscribe("carril.>", "handles.carril");
-        return eventSubs;
     }
 
     @Bean
@@ -70,6 +66,13 @@ public class JuegoConfig {
                 new UseCase.UseCaseWrap("carro.KilometrajeCambiado", (UseCase) moverCarroEnCarrilUseCase),
                 new UseCase.UseCaseWrap("juego.JuegoFinalizado", (UseCase) notificarGanadoresUseCase)
         );
+    }
+
+    @Bean
+    public RabbitAdmin rabbitAdmin(RabbitTemplate rabbitTemplate) {
+        var rabbitAdmin = new RabbitAdmin(rabbitTemplate);
+        rabbitAdmin.declareExchange(new TopicExchange(EXCHANGE));
+        return rabbitAdmin;
     }
 
 }

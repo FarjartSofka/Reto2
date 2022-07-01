@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Component
 public class NATSEventBus implements EventBus {
     private static final String ORIGIN = "cargame";
     private static final String TOPIC_ERROR = "cargame.error";
