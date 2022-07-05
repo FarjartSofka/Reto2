@@ -6,10 +6,7 @@ import co.com.sofka.cargame.SocketController;
 import co.com.sofka.cargame.infra.bus.EventListenerSubscriber;
 import co.com.sofka.cargame.infra.bus.EventSubscriber;
 import co.com.sofka.cargame.infra.bus.NATSEventSubscriber;
-import co.com.sofka.cargame.infra.services.CarrilCarroQueryService;
-import co.com.sofka.cargame.infra.services.CarroQueryService;
-import co.com.sofka.cargame.infra.services.JuegoQueryService;
-import co.com.sofka.cargame.infra.services.MoverCarroCommandService;
+import co.com.sofka.cargame.infra.services.*;
 import co.com.sofka.cargame.usecase.listeners.*;
 import co.com.sofka.infraestructure.asyn.SubscriberEvent;
 import co.com.sofka.infraestructure.bus.EventBus;
@@ -39,13 +36,15 @@ public class JuegoConfig {
             CarrilCarroQueryService carrilCarroService,
             CarroQueryService carroQueryService,
             JuegoQueryService juegoQueryService,
-            MoverCarroCommandService moverCarroCommandService
+            MoverCarroCommandService moverCarroCommandService,
+            ScoreQueryService scoreQueryService
     ) {
         ServiceBuilder serviceBuilder = new ServiceBuilder();
         serviceBuilder.addService(carrilCarroService);
         serviceBuilder.addService(carroQueryService);
         serviceBuilder.addService(juegoQueryService);
         serviceBuilder.addService(moverCarroCommandService);
+        serviceBuilder.addService(scoreQueryService);
         return serviceBuilder;
     }
 
