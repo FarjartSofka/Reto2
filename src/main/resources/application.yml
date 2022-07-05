@@ -7,9 +7,7 @@ spring:
   data:
     mongodb:
       uri: ${MONGO_URI:mongodb+srv://Reto2:Reto2@cluster0.fy8u1.mongodb.net/cargame?retryWrites=true&w=majority}
-    #mongodb:
-      #uri: ${MONGO_URI:mongodb://localhost:27017/cargame}
   #nats:
   #  uri: ${NATS_URI:nats://localhost:4222}
   rabbitmq:
-    addresses: ${BUS_URI:amqps://jsvovtzn:Kv_3-snJZxG5RwJtkxbtUoPjT2d10WX4@porpoise.rmq.cloudamqp.com/jsvovtzn}
+    addresses: ${BUS_URI:amqps://vabdwpdv:o7eSWGumHogKcZX1iHuQR4eN81Q5TTKX@jackal.rmq.cloudamqp.com/vabdwpdv}
