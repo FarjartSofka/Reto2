@@ -12,4 +12,4 @@ spring:
   #nats:
   #  uri: ${NATS_URI:nats://localhost:4222}
   rabbitmq:
-    addresses: ${BUS_URI:amqps://dgdjrqkc:VYuPP-4fjSgZIUyGgfOC-dyLXqDdzsa9@beaver.rmq.cloudamqp.com/dgdjrqkc}
+    addresses: ${BUS_URI:amqps://jsvovtzn:Kv_3-snJZxG5RwJtkxbtUoPjT2d10WX4@porpoise.rmq.cloudamqp.com/jsvovtzn}
